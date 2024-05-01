@@ -1084,8 +1084,8 @@ void setTXPower() {
 		if (model == MODEL_D1) LoRa->setTxPower(lora_txp, PA_OUTPUT_PA_BOOST_PIN);
 		if (model == MODEL_D2) LoRa->setTxPower(lora_txp, PA_OUTPUT_RFO_PIN);
 
-		if (model == MODEL_FF) LoRa->setTxPower(lora_txp, PA_OUTPUT_PA_BOOST_PIN);
-		if (model == MODEL_FE) LoRa->setTxPower(lora_txp, PA_OUTPUT_RFO_PIN);
+		if (model == MODEL_FE) LoRa->setTxPower(lora_txp, PA_OUTPUT_PA_BOOST_PIN);
+		if (model == MODEL_FF) LoRa->setTxPower(lora_txp, PA_OUTPUT_RFO_PIN);
 	}
 }
 
