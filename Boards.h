@@ -42,6 +42,7 @@
   #define BOARD_RNODE_NG_22   0x42
   #define BOARD_GENERIC_NRF52 0x50
   #define BOARD_RAK4630       0x51
+  #define BOARD_COMMANDO_24V1 0x52
 
   #if defined(__AVR_ATmega1284P__)
     #define PLATFORM PLATFORM_AVR
@@ -65,6 +66,8 @@
       #define MODEM SX1262
     #elif BOARD_MODEL == BOARD_GENERIC_NRF52
       #define MODEM SX1262
+    #elif BOARD_MODEL == BOARD_COMMANDO_24V1
+      #define MODEM SX1280	  
     #else
       #define MODEM SX1276
     #endif
@@ -177,6 +180,28 @@
       const int pin_dio = 39;
       const int pin_led_rx = 14;
       const int pin_led_tx = 32;
+
+    #elif BOARD_MODEL == BOARD_COMMANDO_24V1
+	  #define MODEM SX1280
+	  #define HAS_DISPLAY true
+      #define HAS_BLUETOOTH true
+      #define HAS_CONSOLE true
+      #define HAS_EEPROM true
+      #define HAS_BUSY true
+      #define HAS_RF_SWITCH_RX_TX true
+      #define I2C_SDA 21
+      #define I2C_SCL 22	  
+      const int pin_cs = 5;
+      const int pin_reset = 17;
+      const int pin_dio = 16;
+      const int pin_led_rx = 14;
+      const int pin_led_tx = 32;
+      const int pin_sclk = 18;
+      const int pin_mosi = 23;
+      const int pin_miso = 19;
+      const int pin_busy = 33;
+      const int pin_rxen = 15;
+      const int pin_txen = 25;
 
     #elif BOARD_MODEL == BOARD_LORA32_V1_0
       #define HAS_DISPLAY true
