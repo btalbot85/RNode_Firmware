@@ -108,6 +108,9 @@ firmware-featheresp32:
 firmware-genericesp32:
 	arduino-cli compile --fqbn esp32:esp32:esp32 -e --build-property "build.partitions=no_ota" --build-property "upload.maximum_size=2097152" --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x35\""
 
+firmware-commando_24v1:
+        arduino-cli compile --fqbn esp32:esp32:esp32 -e --build-property "build.partitions=no_ota" --build-property "upload.maximum_size=2097152" --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x52\""
+
 firmware-rak4630:
 	arduino-cli compile --fqbn rakwireless:nrf52:WisCoreRAK4631Board -e --build-property "build.partitions=no_ota" --build-property "upload.maximum_size=2097152" --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x51\""
 
@@ -184,6 +187,13 @@ upload-featheresp32:
 	arduino-cli upload -p /dev/ttyUSB0 --fqbn esp32:esp32:featheresp32
 	@sleep 1
 	rnodeconf /dev/ttyUSB0 --firmware-hash $$(./partition_hashes ./build/esp32.esp32.featheresp32/RNode_Firmware.ino.bin)
+	@sleep 3
+	python ./Release/esptool/esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size 4MB 0x210000 ./Release/console_image.bin
+
+upload-commando_24v1:
+	arduino-cli upload -p /dev/ttyUSB0 --fqbn commando:esp32:commando-24
+	@sleep 1
+	rnodeconf /dev/ttyUSB0 --firmware-hash $$(./partition_hashes ./build/commando.esp32.commando-24/RNode_Firmware.ino.bin)
 	@sleep 3
 	python ./Release/esptool/esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size 4MB 0x210000 ./Release/console_image.bin
 
@@ -355,6 +365,15 @@ release-genericesp32:
 	cp build/esp32.esp32.esp32/RNode_Firmware.ino.bootloader.bin build/rnode_firmware_esp32_generic.bootloader
 	cp build/esp32.esp32.esp32/RNode_Firmware.ino.partitions.bin build/rnode_firmware_esp32_generic.partitions
 	zip --junk-paths ./Release/rnode_firmware_esp32_generic.zip ./Release/esptool/esptool.py ./Release/console_image.bin build/rnode_firmware_esp32_generic.boot_app0 build/rnode_firmware_esp32_generic.bin build/rnode_firmware_esp32_generic.bootloader build/rnode_firmware_esp32_generic.partitions
+	rm -r build
+
+release-commando_24v1:
+	arduino-cli compile --fqbn commando:esp32:commando-24 -e --build-property "build.partitions=no_ota" --build-property "upload.maximum_size=2097152" --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x35\""
+	cp ~/.arduino15/packages/esp32/hardware/esp32/2.0.*/tools/partitions/boot_app0.bin build/rnode_firmware_commando_24v1.boot_app0
+	cp build/commando.esp32.commando-24/RNode_Firmware-master.ino.bin build/rnode_firmware_commando_24v1.bin
+	cp build/commando.esp32.commando-24/RNode_Firmware.ino.bootloader.bin build/rnode_firmware_commando_24v1.bootloader
+	cp build/commando.esp32.commando-24/RNode_Firmware.ino.partitions.bin build/rnode_firmware_commando_24v1.partitions
+	zip --junk-paths ./Release/rnode_firmware_commando_24v1.zip ./Release/esptool/esptool.py ./Release/console_image.bin build/rnode_firmware_commando_24v1.boot_app0 build/rnode_firmware_commando_24v1.bin build/rnode_firmware_commando_24v1.bootloader build/rnode_firmware_commando_24v1.partitions
 	rm -r build
 
 release-mega2560:
