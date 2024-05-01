@@ -45,8 +45,8 @@
 	#define MODEL_C9 0xC9
 	#define MODEL_C5 0xC5
 	#define MODEL_CA 0xCA
-    #define MODEL_D1 0xD1
-    #define MODEL_D2 0xD2
+        #define MODEL_D1 0xD1
+        #define MODEL_D2 0xD2
 	#define MODEL_E4 0xE4
 	#define MODEL_E9 0xE9
 	#define MODEL_E3 0xE3
