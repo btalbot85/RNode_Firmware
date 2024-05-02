@@ -368,9 +368,9 @@ release-genericesp32:
 	rm -r build
 
 release-commando_24v1:
-	arduino-cli compile --fqbn commando:esp32:commando-24 -e --build-property "build.partitions=no_ota" --build-property "upload.maximum_size=2097152" --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x35\""
+	arduino-cli compile --fqbn commando:esp32:commando-24 -e --build-property "build.partitions=no_ota" --build-property "upload.maximum_size=2097152" --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x52\""
 	cp ~/.arduino15/packages/esp32/hardware/esp32/2.0.*/tools/partitions/boot_app0.bin build/rnode_firmware_commando_24v1.boot_app0
-	cp build/commando.esp32.commando-24/RNode_Firmware-master.ino.bin build/rnode_firmware_commando_24v1.bin
+	cp build/commando.esp32.commando-24/RNode_Firmware.ino.bin build/rnode_firmware_commando_24v1.bin
 	cp build/commando.esp32.commando-24/RNode_Firmware.ino.bootloader.bin build/rnode_firmware_commando_24v1.bootloader
 	cp build/commando.esp32.commando-24/RNode_Firmware.ino.partitions.bin build/rnode_firmware_commando_24v1.partitions
 	zip --junk-paths ./Release/rnode_firmware_commando_24v1.zip ./Release/esptool/esptool.py ./Release/console_image.bin build/rnode_firmware_commando_24v1.boot_app0 build/rnode_firmware_commando_24v1.bin build/rnode_firmware_commando_24v1.bootloader build/rnode_firmware_commando_24v1.partitions
