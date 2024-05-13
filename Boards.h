@@ -189,8 +189,8 @@
       #define HAS_EEPROM true
       #define HAS_BUSY true
       #define HAS_RF_SWITCH_RX_TX true
-      #define I2C_SDA 21
-      #define I2C_SCL 22	  
+      #define I2C_SDA 17
+      #define I2C_SCL 5
       const int pin_cs = 19;
       const int pin_reset = 15;
       const int pin_dio = 33;
