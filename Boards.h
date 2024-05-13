@@ -194,7 +194,7 @@
       const int pin_cs = 19;
       const int pin_reset = 15;
       const int pin_dio = 33;
-      const int pin_led_rx = 14;
+      const int pin_led_rx = 13;
       const int pin_led_tx = 32;
       const int pin_sclk = 21;
       const int pin_mosi = 22;
@@ -202,6 +202,8 @@
       const int pin_busy = 25;
       const int pin_rxen = 18;
       const int pin_txen = 16;
+      const int pin_gps_tx = 27;
+      const int pin_gps_rx = 14;
 
     #elif BOARD_MODEL == BOARD_LORA32_V1_0
       #define HAS_DISPLAY true
